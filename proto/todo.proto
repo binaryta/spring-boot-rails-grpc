@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package com.example.demo.todostore;
+
+option java_multiple_files = true;
+option java_outer_classname = "TodoStore";
+option java_package = "com.example.demo.todostore";
+
+import "google/protobuf/empty.proto";
+
+service Todotore {
+  rpc ListTodos(ListTodosRequest) returns (ListTodosResponse) {}
+  rpc GetTodo(GetTodoRequest) returns (GetTodoResponse) {}
+}
+
+message ListTodosRequest {
+}
+
+message ListTodosResponse {
+  repeated GetTodoRequest todo = 1;
+}
+
+message GetTodoRequest {
+  int64 id = 1;
+}
+
+message GetTodoResponse {
+  int64 id = 1;
+  string content = 2;
+}
