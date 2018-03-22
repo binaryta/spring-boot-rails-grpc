@@ -3,31 +3,24 @@
 
 require 'google/protobuf'
 
-require 'google/protobuf/empty_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
-  add_message "com.example.demo.todostore.ListTodosRequest" do
+  add_message "todostore.ListTodosRequest" do
   end
-  add_message "com.example.demo.todostore.ListTodosResponse" do
-    repeated :todo, :message, 1, "com.example.demo.todostore.GetTodoResponse"
+  add_message "todostore.ListTodosResponse" do
+    repeated :todo, :message, 1, "todostore.GetTodoResponse"
   end
-  add_message "com.example.demo.todostore.GetTodoRequest" do
+  add_message "todostore.GetTodoRequest" do
     optional :id, :int64, 1
   end
-  add_message "com.example.demo.todostore.GetTodoResponse" do
+  add_message "todostore.GetTodoResponse" do
     optional :id, :int64, 1
     optional :content, :string, 2
   end
 end
 
-module Com
-  module Example
-    module Demo
-      module Todostore
-        ListTodosRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("com.example.demo.todostore.ListTodosRequest").msgclass
-        ListTodosResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("com.example.demo.todostore.ListTodosResponse").msgclass
-        GetTodoRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("com.example.demo.todostore.GetTodoRequest").msgclass
-        GetTodoResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("com.example.demo.todostore.GetTodoResponse").msgclass
-      end
-    end
-  end
+module Todostore
+  ListTodosRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("todostore.ListTodosRequest").msgclass
+  ListTodosResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("todostore.ListTodosResponse").msgclass
+  GetTodoRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("todostore.GetTodoRequest").msgclass
+  GetTodoResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("todostore.GetTodoResponse").msgclass
 end
