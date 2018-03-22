@@ -6,7 +6,7 @@ option java_multiple_files = true;
 option java_outer_classname = "TodoStore";
 option java_package = "com.example.demo.todostore";
 
-import "google/protobuf/empty.proto";
+//import "google/protobuf/empty.proto";
 
 service Todostore {
   rpc ListTodos(ListTodosRequest) returns (ListTodosResponse) {}
@@ -17,7 +17,7 @@ message ListTodosRequest {
 }
 
 message ListTodosResponse {
-  repeated GetTodoRequest todo = 1;
+  repeated GetTodoResponse todo = 1;
 }
 
 message GetTodoRequest {
