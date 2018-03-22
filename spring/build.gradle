@@ -10,6 +10,7 @@ buildscript {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 		classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
 		classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+    classpath("com.google.protobuf:protobuf-gradle-plugin:0.8.5")
 	}
 }
 
@@ -18,6 +19,14 @@ apply plugin: 'kotlin-spring'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.google.protobuf'
+
+sourceSets {
+    main.kotlin.srcDirs += 'src/main/kotlin'
+    main.java.srcDirs += 'src/main/java'
+    main.kotlin.srcDirs += 'src/main/generated-proto'
+    main.proto.srcDirs += '../proto'
+}
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -37,13 +46,47 @@ compileTestKotlin {
 
 repositories {
 	mavenCentral()
+  jcenter()
 }
 
 
+def grpcVersion = '1.10.0'
 dependencies {
+  // grpc
+  compile "io.grpc:grpc-netty:${grpcVersion}"
+  compile "io.grpc:grpc-protobuf:${grpcVersion}"
+  compile "io.grpc:grpc-stub:${grpcVersion}"
+  compile "org.lognet:grpc-spring-boot-starter:2.0.4"
+
 	compile('org.springframework.boot:spring-boot-starter')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	compile("org.jetbrains.kotlin:kotlin-reflect")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.3.0'
+    }
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.5.0"
+        }
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    outputSubDir = 'generated-proto'
+                }
+            }
+            task.plugins {
+                grpc {
+                    outputSubDir = 'generated-proto'
+                }
+            }
+        }
+    }
+    generatedFilesBaseDir = "$projectDir/src/"
 }
