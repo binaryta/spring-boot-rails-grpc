@@ -25,7 +25,7 @@ sourceSets {
     main.kotlin.srcDirs += 'src/main/kotlin'
     main.java.srcDirs += 'src/main/java'
     main.kotlin.srcDirs += 'src/main/generated-proto'
-    main.proto.srcDirs += '../proto'
+    main.proto.srcDirs += '../generated-proto'
 }
 
 group = 'com.example'
