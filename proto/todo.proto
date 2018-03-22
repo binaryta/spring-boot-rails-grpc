@@ -8,7 +8,7 @@ option java_package = "com.example.demo.todostore";
 
 import "google/protobuf/empty.proto";
 
-service Todotore {
+service Todostore {
   rpc ListTodos(ListTodosRequest) returns (ListTodosResponse) {}
   rpc GetTodo(GetTodoRequest) returns (GetTodoResponse) {}
 }
