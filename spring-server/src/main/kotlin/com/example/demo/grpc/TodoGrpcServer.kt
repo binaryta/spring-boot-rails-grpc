@@ -7,11 +7,11 @@ import io.grpc.stub.StreamObserver
 @GRpcService
 class TodoGrpcServer : TodostoreGrpc.TodostoreImplBase() {
   override
-  fun listTodos(req: ListTodosRequest, res: StreamObserver<ListTodosResponse>) {
-    val todosBuilder = ListTodosResponse.newBuilder()
-    val todoBuilder1  = GetTodoResponse.newBuilder()
-    val todoBuilder2  = GetTodoResponse.newBuilder()
-    val todoBuilder3  = GetTodoResponse.newBuilder()
+  fun getTodos(req: GetTodosRequest, res: StreamObserver<GetTodosResponse>) {
+    val todosBuilder = GetTodosResponse.newBuilder()
+    val todoBuilder1  = Todo.newBuilder()
+    val todoBuilder2  = Todo.newBuilder()
+    val todoBuilder3  = Todo.newBuilder()
     todoBuilder1.setId(1)
     todoBuilder1.setContent("Hello gRPC!!!")
     todoBuilder2.setId(2)
@@ -29,10 +29,13 @@ class TodoGrpcServer : TodostoreGrpc.TodostoreImplBase() {
 
   override
   fun getTodo(req: GetTodoRequest, res: StreamObserver<GetTodoResponse>) {
-    val todoBuilder  = GetTodoResponse.newBuilder()
+    val getTodoBuilder = GetTodoResponse.newBuilder()
+    val todoBuilder  = Todo.newBuilder()
     todoBuilder.setId(1)
     todoBuilder.setContent("Hello gRPC!!!")
-    res.onNext(todoBuilder.build())
+
+    getTodoBuilder.setTodo(todoBuilder.build())
+    res.onNext(getTodoBuilder.build())
     res.onCompleted()
   }
 
