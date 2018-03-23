@@ -6,11 +6,11 @@ option java_multiple_files = true;
 option java_outer_classname = "TodoStore";
 option java_package = "com.example.demo.todostore";
 
-//import "google/protobuf/empty.proto";
-
 service Todostore {
   rpc GetTodos(GetTodosRequest) returns (GetTodosResponse) {}
   rpc GetTodo(GetTodoRequest) returns (GetTodoResponse) {}
+  rpc UpdateTodo(UpdateTodoRequest) returns (UpdateTodoResponse) {}
+  rpc DeleteTodo(DeleteTodoRequest) returns (DeleteTodoResponse) {}
 }
 
 message GetTodosRequest {
@@ -24,6 +24,21 @@ message GetTodoRequest {
 }
 message GetTodoResponse {
   Todo todo = 1;
+}
+
+message UpdateTodoRequest {
+  int64 id = 1;
+  string content = 2;
+}
+message UpdateTodoResponse {
+  Todo todo = 1;
+}
+
+message DeleteTodoRequest {
+  int64 id = 1;
+}
+message DeleteTodoResponse {
+  bool status = 1;
 }
 
 message Todo {
