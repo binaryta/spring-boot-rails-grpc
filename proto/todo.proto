@@ -9,22 +9,24 @@ option java_package = "com.example.demo.todostore";
 //import "google/protobuf/empty.proto";
 
 service Todostore {
-  rpc ListTodos(ListTodosRequest) returns (ListTodosResponse) {}
+  rpc GetTodos(GetTodosRequest) returns (GetTodosResponse) {}
   rpc GetTodo(GetTodoRequest) returns (GetTodoResponse) {}
 }
 
-message ListTodosRequest {
+message GetTodosRequest {
 }
-
-message ListTodosResponse {
-  repeated GetTodoResponse todo = 1;
+message GetTodosResponse {
+  repeated Todo todo = 1;
 }
 
 message GetTodoRequest {
   int64 id = 1;
 }
-
 message GetTodoResponse {
+  Todo todo = 1;
+}
+
+message Todo {
   int64 id = 1;
   string content = 2;
 }
