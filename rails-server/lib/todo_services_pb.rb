@@ -6,8 +6,6 @@ require 'todo_pb'
 
 module Todostore
   module Todostore
-    # import "google/protobuf/empty.proto";
-    #
     class Service
 
       include GRPC::GenericService
@@ -18,6 +16,8 @@ module Todostore
 
       rpc :GetTodos, GetTodosRequest, GetTodosResponse
       rpc :GetTodo, GetTodoRequest, GetTodoResponse
+      rpc :UpdateTodo, UpdateTodoRequest, UpdateTodoResponse
+      rpc :DeleteTodo, DeleteTodoRequest, DeleteTodoResponse
     end
 
     Stub = Service.rpc_stub_class

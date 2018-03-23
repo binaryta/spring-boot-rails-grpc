@@ -15,6 +15,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "todostore.GetTodoResponse" do
     optional :todo, :message, 1, "todostore.Todo"
   end
+  add_message "todostore.UpdateTodoRequest" do
+    optional :id, :int64, 1
+    optional :content, :string, 2
+  end
+  add_message "todostore.UpdateTodoResponse" do
+    optional :todo, :message, 1, "todostore.Todo"
+  end
+  add_message "todostore.DeleteTodoRequest" do
+    optional :id, :int64, 1
+  end
+  add_message "todostore.DeleteTodoResponse" do
+    optional :status, :bool, 1
+  end
   add_message "todostore.Todo" do
     optional :id, :int64, 1
     optional :content, :string, 2
@@ -26,5 +39,9 @@ module Todostore
   GetTodosResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("todostore.GetTodosResponse").msgclass
   GetTodoRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("todostore.GetTodoRequest").msgclass
   GetTodoResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("todostore.GetTodoResponse").msgclass
+  UpdateTodoRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("todostore.UpdateTodoRequest").msgclass
+  UpdateTodoResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("todostore.UpdateTodoResponse").msgclass
+  DeleteTodoRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("todostore.DeleteTodoRequest").msgclass
+  DeleteTodoResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("todostore.DeleteTodoResponse").msgclass
   Todo = Google::Protobuf::DescriptorPool.generated_pool.lookup("todostore.Todo").msgclass
 end
