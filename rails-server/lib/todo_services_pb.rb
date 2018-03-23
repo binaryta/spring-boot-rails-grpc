@@ -16,7 +16,7 @@ module Todostore
       self.unmarshal_class_method = :decode
       self.service_name = 'todostore.Todostore'
 
-      rpc :ListTodos, ListTodosRequest, ListTodosResponse
+      rpc :GetTodos, GetTodosRequest, GetTodosResponse
       rpc :GetTodo, GetTodoRequest, GetTodoResponse
     end
 

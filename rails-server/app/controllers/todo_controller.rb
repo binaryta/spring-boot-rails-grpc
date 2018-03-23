@@ -6,8 +6,8 @@ class TodoController < ApplicationController
     stub = Todostore::Todostore::Stub.new(
       'localhost:6565', :this_channel_is_insecure
     )
-    req = Todostore::ListTodosResponse.new
-    res = stub.list_todos(req)
+    req = Todostore::GetTodosResponse.new
+    res = stub.get_todos(req)
     @todos = res.todo
   end
 end
