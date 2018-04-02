@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class TodoController {
-    @GetMapping("")
-    fun index(): String = "hello!"
+  @GetMapping("")
+  fun index(): String = "hello!"
 }
-

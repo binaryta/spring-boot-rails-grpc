@@ -47,6 +47,9 @@ compileTestKotlin {
 repositories {
 	mavenCentral()
   jcenter()
+  maven {
+    url  "https://dl.bintray.com/kotlin/exposed"
+  }
 }
 
 
@@ -57,6 +60,11 @@ dependencies {
   compile "io.grpc:grpc-protobuf:${grpcVersion}"
   compile "io.grpc:grpc-stub:${grpcVersion}"
   compile "org.lognet:grpc-spring-boot-starter:2.2.0"
+
+  // orm
+  compile 'org.jetbrains.exposed:exposed:0.10.1'
+  runtime('mysql:mysql-connector-java')
+
 
 	compile('org.springframework.boot:spring-boot-starter')
 	compile('org.springframework.boot:spring-boot-starter-web')

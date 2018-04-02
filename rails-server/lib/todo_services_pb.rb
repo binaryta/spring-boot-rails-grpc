@@ -15,7 +15,7 @@ module Todostore
       self.service_name = 'todostore.Todostore'
 
       rpc :GetTodos, GetTodosRequest, GetTodosResponse
-      rpc :GetTodo, GetTodoRequest, GetTodoResponse
+      rpc :AddTodo, AddTodoRequest, AddTodoResponse
       rpc :UpdateTodo, UpdateTodoRequest, UpdateTodoResponse
       rpc :DeleteTodo, DeleteTodoRequest, DeleteTodoResponse
     end

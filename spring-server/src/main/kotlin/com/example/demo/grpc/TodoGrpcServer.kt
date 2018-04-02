@@ -27,16 +27,15 @@ class TodoGrpcServer : TodostoreGrpc.TodostoreImplBase() {
     res.onCompleted()
   }
 
-  override
-  fun getTodo(req: GetTodoRequest, res: StreamObserver<GetTodoResponse>) {
-    val getTodoBuilder = GetTodoResponse.newBuilder()
-    val todoBuilder  = Todo.newBuilder()
-    todoBuilder.setId(1)
-    todoBuilder.setContent("Hello gRPC!!!")
+  //override
+  //fun getTodo(req: GetTodoRequest, res: StreamObserver<GetTodoResponse>) {
+  //  val getTodoBuilder = GetTodoResponse.newBuilder()
+  //  val todoBuilder  = Todo.newBuilder()
+  //  todoBuilder.setId(1)
+  //  todoBuilder.setContent("Hello gRPC!!!")
 
-    getTodoBuilder.setTodo(todoBuilder.build())
-    res.onNext(getTodoBuilder.build())
-    res.onCompleted()
-  }
-
+  //  getTodoBuilder.setTodo(todoBuilder.build())
+  //  res.onNext(getTodoBuilder.build())
+  //  res.onCompleted()
+  //}
 }

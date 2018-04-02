@@ -8,7 +8,7 @@ option java_package = "com.example.demo.todostore";
 
 service Todostore {
   rpc GetTodos(GetTodosRequest) returns (GetTodosResponse) {}
-  rpc GetTodo(GetTodoRequest) returns (GetTodoResponse) {}
+  rpc AddTodo(AddTodoRequest) returns (AddTodoResponse) {}
   rpc UpdateTodo(UpdateTodoRequest) returns (UpdateTodoResponse) {}
   rpc DeleteTodo(DeleteTodoRequest) returns (DeleteTodoResponse) {}
 }
@@ -19,10 +19,11 @@ message GetTodosResponse {
   repeated Todo todo = 1;
 }
 
-message GetTodoRequest {
+message AddTodoRequest {
   int64 id = 1;
+  string content = 2;
 }
-message GetTodoResponse {
+message AddTodoResponse {
   Todo todo = 1;
 }
 
