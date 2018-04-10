@@ -29,7 +29,7 @@ message AddTaskResponse {
 message UpdateTaskRequest {
   int64 id = 1;
   string content = 2;
-  bool status = 3;
+  bool done = 3;
 }
 message UpdateTaskResponse {
   Task task = 1;
@@ -45,5 +45,5 @@ message DeleteTaskResponse {
 message Task {
   int64 id = 1;
   string content = 2;
-  bool status = 3;
+  bool done = 3;
 }
