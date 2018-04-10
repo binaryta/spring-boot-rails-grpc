@@ -20,9 +20,7 @@ message GetTasksResponse {
 }
 
 message AddTaskRequest {
-  int64 id = 1;
-  string content = 2;
-  bool status = 3;
+  string content = 1;
 }
 message AddTaskResponse {
   Task task = 1;
