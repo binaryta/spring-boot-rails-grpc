@@ -13,7 +13,7 @@ class TaskController < ApplicationController
   def create
     req = Taskstore::AddTaskRequest.new(content: params["content"])
     res = @stub.add_task(req)
-    render json: res.task
+    render json: res.task.to_h
   end
 
   private
