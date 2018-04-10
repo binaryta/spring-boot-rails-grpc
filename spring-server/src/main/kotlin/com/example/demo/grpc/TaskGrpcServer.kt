@@ -20,7 +20,7 @@ class TaskGrpcServer(@Autowired repository: TaskRepository) : TaskstoreGrpc.Task
       val taskBuilder = Task.newBuilder()
       taskBuilder.setId(task.id)
       taskBuilder.setContent(task.content)
-      taskBuilder.setStatus(task.status)
+      taskBuilder.setDone(task.done)
       tasksBuilder.addTask(taskBuilder)
     }
     res.onNext(tasksBuilder.build())
@@ -35,7 +35,7 @@ class TaskGrpcServer(@Autowired repository: TaskRepository) : TaskstoreGrpc.Task
     val taskBuilder = Task.newBuilder()
     taskBuilder.setId(task.id)
     taskBuilder.setContent(task.content)
-    taskBuilder.setStatus(task.status)
+    taskBuilder.setDone(task.done)
     addTaskResponseBuilder.setTask(taskBuilder.build())
 
     res.onNext(addTaskResponseBuilder.build())
