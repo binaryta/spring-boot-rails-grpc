@@ -10,9 +10,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :task, :message, 1, "taskstore.Task"
   end
   add_message "taskstore.AddTaskRequest" do
-    optional :id, :int64, 1
-    optional :content, :string, 2
-    optional :status, :bool, 3
+    optional :content, :string, 1
   end
   add_message "taskstore.AddTaskResponse" do
     optional :task, :message, 1, "taskstore.Task"

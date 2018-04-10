@@ -5,9 +5,14 @@ class TaskController < ApplicationController
   before_action :stub
 
   def index
-    req = Taskstore::GetTasksResponse.new
+    req = Taskstore::GetTasksRequest.new
     res = @stub.get_tasks(req)
     @tasks = res.task
+  end
+
+  def create
+    req = Taskstore::AddTaskRequest.new(content: params["content"])
+    res = @stub.add_task(req)
   end
 
   private

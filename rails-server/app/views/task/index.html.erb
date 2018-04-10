@@ -1,3 +1,8 @@
+<%= form_tag("/tasks", method: "post") do %>
+  <%= text_field_tag(:content) %>
+  <%= submit_tag("Add Task") %>
+<% end %>
+
 <% @tasks.each do |task| %>
   <div style='padding-top: 10px'>
     <span><%= task.id %></span>
