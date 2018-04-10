@@ -1,5 +1,6 @@
 # spring-boot-rails-grpc
 
+## Get started
 Create grpc-demo database and create tasks table into it on MySQL, before try this demo.
 ```sql
 CREATE DATABASE grpc-demo;
