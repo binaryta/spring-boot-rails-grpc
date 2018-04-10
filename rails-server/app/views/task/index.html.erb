@@ -1,0 +1,7 @@
+<% @tasks.each do |task| %>
+  <div style='padding-top: 10px'>
+    <span><%= task.id %></span>
+    <p><%= task.content %></p>
+    <p><%= task.status %></p>
+  </div>
+<% end %>
