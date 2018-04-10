@@ -7,12 +7,13 @@ class TaskController < ApplicationController
   def index
     req = Taskstore::GetTasksRequest.new
     res = @stub.get_tasks(req)
-    @tasks = res.task
+    render json: res.task
   end
 
   def create
     req = Taskstore::AddTaskRequest.new(content: params["content"])
     res = @stub.add_task(req)
+    render json: res.task
   end
 
   private

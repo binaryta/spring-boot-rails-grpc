@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Tasks } from './Task';
 
-ReactDOM.render(
-  <h1>Hello, world!</h1>,
-  document.getElementById('root')
-);
+window.onload = () => {
+  ReactDOM.render(
+    <Tasks/>,
+    document.querySelector('#root')
+  );
+}
