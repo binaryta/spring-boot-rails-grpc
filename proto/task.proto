@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package taskstore;
+
+option java_multiple_files = true;
+option java_outer_classname = "TaskStore";
+option java_package = "com.example.demo.taskstore";
+
+service Taskstore {
+  rpc GetTasks(GetTasksRequest) returns (GetTasksResponse) {}
+  rpc AddTask(AddTaskRequest) returns (AddTaskResponse) {}
+  rpc UpdateTask(UpdateTaskRequest) returns (UpdateTaskResponse) {}
+  rpc DeleteTask(DeleteTaskRequest) returns (DeleteTaskResponse) {}
+}
+
+message GetTasksRequest {
+}
+message GetTasksResponse {
+  repeated Task task = 1;
+}
+
+message AddTaskRequest {
+  int64 id = 1;
+  string content = 2;
+  bool status = 3;
+}
+message AddTaskResponse {
+  Task task = 1;
+}
+
+message UpdateTaskRequest {
+  int64 id = 1;
+  string content = 2;
+  bool status = 3;
+}
+message UpdateTaskResponse {
+  Task task = 1;
+}
+
+message DeleteTaskRequest {
+  int64 id = 1;
+}
+message DeleteTaskResponse {
+  bool httpStatus = 1;
+}
+
+message Task {
+  int64 id = 1;
+  string content = 2;
+  bool status = 3;
+}
