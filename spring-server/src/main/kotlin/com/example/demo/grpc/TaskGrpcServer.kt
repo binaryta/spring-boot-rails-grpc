@@ -14,7 +14,6 @@ class TaskGrpcServer(@Autowired repository: TaskRepository) : TaskstoreGrpc.Task
   override
   fun getTasks(req: GetTasksRequest, res: StreamObserver<GetTasksResponse>) {
     val tasksBuilder = GetTasksResponse.newBuilder()
-    val repository = ExposedTaskRepository()
     val tasks = repository.findAll()
 
     tasks.forEach { task ->
@@ -30,6 +29,17 @@ class TaskGrpcServer(@Autowired repository: TaskRepository) : TaskstoreGrpc.Task
 
   override
   fun addTask(req: AddTaskRequest, res: StreamObserver<AddTaskResponse>) {
+    val task = repository.create(req.content)
+
+    val addTaskResponseBuilder = AddTaskResponse.newBuilder()
+    val taskBuilder = Task.newBuilder()
+    taskBuilder.setId(task.id)
+    taskBuilder.setContent(task.content)
+    taskBuilder.setStatus(task.status)
+    addTaskResponseBuilder.setTask(taskBuilder.build())
+
+    res.onNext(addTaskResponseBuilder.build())
+    res.onCompleted()
   }
 
   //override
