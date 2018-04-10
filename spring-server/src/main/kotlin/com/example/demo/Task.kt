@@ -3,5 +3,5 @@ package com.example.demo
 data class TaskData(
     val id: Long,
     val content: String,
-    val completed: Boolean
+    val status: Boolean
 )

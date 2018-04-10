@@ -8,6 +8,6 @@ import org.jetbrains.exposed.sql.Database
 class DemoApplication
 
 fun main(args: Array<String>) {
-  Database.connect("jdbc:mysql://localhost/todo", "com.mysql.jdbc.Driver", "root", "")
+  Database.connect("jdbc:mysql://localhost/grpc-demo", "com.mysql.jdbc.Driver", "root", "")
   runApplication<DemoApplication>(*args)
 }
