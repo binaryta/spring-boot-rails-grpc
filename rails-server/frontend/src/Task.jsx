@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import 'babel-polyfill';
 
-
 class TasksStore {
   async allTasks() {
     const res = await axios.get("/tasks");
@@ -28,14 +27,27 @@ export class Tasks extends React.Component {
 
   render() {
     return (
-      <div className="tasks">
-        {this.state.tasks.map(task => {
-        return (
-          <div className="task">
-            <p className="task-content">{task.content}</p>
-          </div>
-        )
-        })}
+      <div className="wrapper">
+        <h1 className="title">Today's Todo</h1>
+        <section className="tasks">
+          {this.state.tasks.filter(task => !task.done).map(task => {
+          return (
+            <div className="task">
+              <p className="task-content">{task.content}</p>
+            </div>
+          )
+          })}
+        </section>
+
+        <section className="tasks">
+          {this.state.tasks.filter(task => task.done).map(task => {
+          return (
+            <div className="task">
+              <p className="task-content">{task.content}</p>
+            </div>
+          )
+          })}
+        </section>
       </div>
     )
   }
