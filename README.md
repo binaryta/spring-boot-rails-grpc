@@ -14,7 +14,7 @@ CREATE DATABASE grpc-demo;
 CREATE TABLE `tasks` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `content` varchar(255) NOT NULL DEFAULT '',
-  `status` int(1) NOT NULL DEFAULT '0',
+  `done` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 ```
