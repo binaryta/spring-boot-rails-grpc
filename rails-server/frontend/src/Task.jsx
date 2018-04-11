@@ -2,12 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import 'babel-polyfill';
 
-const getCsrfToken = () => {
-  return document.getElementsByName("csrf-token")[0].content;
+axios.defaults.headers['X-CSRF-TOKEN'] = document.getElementsByName("csrf-token")[0].content;
+
+const Area = {
+  Todo: 1,
+  Done: 2
 }
-
-
-axios.defaults.headers['X-CSRF-TOKEN'] = getCsrfToken();
 
 class TasksStore {
   async allTasks() {
@@ -25,6 +25,8 @@ export class Tasks extends React.Component {
   constructor() {
     super();
     this.store = new TasksStore();
+    this.dragStartArea = null;
+    this.dragTarget = null;
     this.state = {
       tasks: []
     }
@@ -56,6 +58,49 @@ export class Tasks extends React.Component {
     })
   }
 
+  dragStart(e) {
+    this.dragTarget = e.target;
+    this.dragTarget.style.visibility = "hidden";
+
+    if (this.isContainTodoArea(e)) {
+      this.dragStartArea = Area.Todo;
+    } else {
+      this.dragStartArea = Area.Done;
+    }
+  }
+
+  dragEnd(targetTask, e) {
+    if (this.dragStartArea == Area.Todo && this.isContainDoneArea(e)) {
+      this.updateTask(targetTask, true);
+    } else if (this.dragStartArea == Area.Done && this.isContainTodoArea(e)) {
+      this.updateTask(targetTask, false);
+    }
+    this.dragTarget.style.visibility = "visible";
+  }
+
+  updateTask(targetTask, status) {
+    const tasks = this.state.tasks.map( task => {
+      if (task == targetTask) { task.done = status };
+      return task;
+    });
+    this.setState({ tasks: tasks });
+  }
+
+  isContainTodoArea(e) {
+    const todoArea = document.getElementsByClassName("todo-tasks")[0];
+    const isContainYAxis = (e.pageY <= todoArea.getBoundingClientRect().bottom && e.pageY >= todoArea.getBoundingClientRect().top)
+    const isContainXAxis = (e.pageX <= todoArea.getBoundingClientRect().right && e.pageX >= todoArea.getBoundingClientRect().left)
+    console.log(e.pageY);
+    return isContainYAxis && isContainXAxis;
+  }
+
+  isContainDoneArea(e) {
+    const doneArea = document.getElementsByClassName("done-tasks")[0];
+    const isContainYAxis = (e.pageY <= doneArea.getBoundingClientRect().bottom && e.pageY >= doneArea.getBoundingClientRect().top);
+    const isContainXAxis = (e.pageX <= doneArea.getBoundingClientRect().right && e.pageX >= doneArea.getBoundingClientRect().left);
+    return isContainYAxis && isContainXAxis;
+	}
+
   render() {
     return (
       <div className="wrapper">
@@ -67,20 +112,32 @@ export class Tasks extends React.Component {
             onChange={this.onInputTextUpdate.bind(this)}
           />
         </div>
-        <section className="tasks">
+        <section className="tasks todo-tasks">
+          <h2 className="tasks-title">Todo</h2>
           {this.state.tasks.filter(task => !task.done).map(task => {
           return (
-            <div className="task">
+            <div
+              className="task"
+              draggable='true'
+              onDragStart={this.dragStart.bind(this)}
+              onDragEnd={this.dragEnd.bind(this, task)}
+            >
               <p className="task-content">{task.content}</p>
             </div>
           )
           })}
         </section>
 
-        <section className="tasks">
+        <section className="tasks done-tasks">
+          <h2 className="tasks-title">Done</h2>
           {this.state.tasks.filter(task => task.done).map(task => {
           return (
-            <div className="task">
+            <div
+              className="task"
+              draggable='true'
+              onDragStart={this.dragStart.bind(this)}
+              onDragEnd={this.dragEnd.bind(this, task)}
+            >
               <p className="task-content">{task.content}</p>
             </div>
           )
