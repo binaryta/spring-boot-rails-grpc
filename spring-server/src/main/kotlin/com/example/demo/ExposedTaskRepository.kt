@@ -10,18 +10,17 @@ import org.springframework.stereotype.Repository
 
 object Tasks : IntIdTable("tasks") {
   val content = varchar("content", length = 100)
-  val status = integer("status")
+  val done = integer("done")
 }
 
-fun Int.toBoolean(): Boolean {
-  return this != 0
-}
+fun Int.toBoolean(): Boolean = this != 0
+fun Boolean.toInt(): Int = if (this) 1 else 0
 
 class Task(id: EntityID<Int>) : IntEntity(id) {
   companion object : IntEntityClass<Task>(Tasks)
 
   var content by Tasks.content
-  var status by Tasks.status
+  var done by Tasks.done
 }
 
 @Repository
@@ -30,7 +29,7 @@ class ExposedTaskRepository : TaskRepository {
   companion object {
     fun convert(task: Task?): TaskData? {
       task ?: return null
-      return TaskData(task.id.value.toLong(), task.content, task.status.toBoolean())
+      return TaskData(task.id.value.toLong(), task.content, task.done.toBoolean())
     }
   }
 
@@ -52,7 +51,7 @@ class ExposedTaskRepository : TaskRepository {
     return transaction {
       convert(Task.new {
         content = input_content
-        status = 0
+        done = 0
       })!!
     }
   }
@@ -64,10 +63,10 @@ class ExposedTaskRepository : TaskRepository {
     }
   }
 
-  override fun update(id: Int, content: String): TaskData? {
+  override fun update(id: Int, done: Boolean): TaskData? {
     return transaction {
       val task = Task.findById(id)
-      task?.content = content
+      task?.done = done.toInt()
       convert(task)
     }
   }

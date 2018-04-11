@@ -19,6 +19,11 @@ class TasksStore {
     const res = await axios.post("/tasks", {content: text});
     return res.data;
   }
+
+  async updateTask(task) {
+    const res = await axios.patch(`/tasks/${task.id}`, {done: task.done});
+    return res.data;
+  }
 }
 
 export class Tasks extends React.Component {
@@ -78,12 +83,14 @@ export class Tasks extends React.Component {
     this.dragTarget.style.visibility = "visible";
   }
 
-  updateTask(targetTask, status) {
-    const tasks = this.state.tasks.map( task => {
-      if (task == targetTask) { task.done = status };
-      return task;
+  updateTask(targetTask) {
+    this.store.updateTask(targetTask).then(updatedTask => {
+      const tasks = this.state.tasks.map( task => {
+        if (task != targetTask) return task;
+        return updatedTask;
+      })
+      this.setState({ tasks: tasks });
     });
-    this.setState({ tasks: tasks });
   }
 
   isContainTodoArea(e) {

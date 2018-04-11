@@ -1,5 +1,6 @@
 package com.example.demo.grpc
 
+import com.example.demo.TaskData
 import com.example.demo.ExposedTaskRepository
 import com.example.demo.TaskRepository
 import com.example.demo.taskstore.*
@@ -42,15 +43,21 @@ class TaskGrpcServer(@Autowired repository: TaskRepository) : TaskstoreGrpc.Task
     res.onCompleted()
   }
 
-  //override
-  //fun getTask(req: GetTaskRequest, res: StreamObserver<GetTaskResponse>) {
-  //  val getTaskBuilder = GetTaskResponse.newBuilder()
-  //  val taskBuilder  = Task.newBuilder()
-  //  taskBuilder.setId(1)
-  //  taskBuilder.setContent("Hello gRPC!!!")
+  override
+  fun updateTask(req: UpdateTaskRequest, res: StreamObserver<UpdateTaskResponse>) {
+    val task: TaskData? = repository.update(req.id.toInt(), !req.done)
 
-  //  getTaskBuilder.setTask(taskBuilder.build())
-  //  res.onNext(getTaskBuilder.build())
-  //  res.onCompleted()
-  //}
+    val updateTaskResponseBuilder = UpdateTaskResponse.newBuilder()
+    val taskBuilder = Task.newBuilder()
+    if (task != null) {
+      taskBuilder.setId(task.id)
+                 .setContent(task.content)
+                 .setDone(task.done)
+      updateTaskResponseBuilder.setTask(taskBuilder.build())
+      res.onNext(updateTaskResponseBuilder.build())
+    } else {
+      res.onError(null)
+    }
+    res.onCompleted()
+  }
 }

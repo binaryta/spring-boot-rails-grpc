@@ -5,5 +5,5 @@ interface TaskRepository {
   fun findAll(): List<TaskData>
   fun create(input_content: String): TaskData
   fun delete(id: Int): Boolean
-  fun update(id: Int, content: String): TaskData?
+  fun update(id: Int, done: Boolean): TaskData?
 }
