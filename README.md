@@ -1,6 +1,8 @@
 # spring-boot-rails-grpc
 
-![screenshot](https://github.com/Tnarita0000/spring-boot-rails-grpc/blob/master/screenshot.png?raw=true)  
+<img src="https://github.com/Tnarita0000/spring-boot-rails-grpc/blob/master/screen.png?raw=true" width="600" />
+
+
 gRPCによるKotlin & Ruby & Reactという構成でのWeb運用 <前編>
 http://blog.engineer.adways.net/entry/2018/03/23/190820
 
@@ -12,7 +14,7 @@ CREATE DATABASE grpc-demo;
 CREATE TABLE `tasks` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `content` varchar(255) NOT NULL DEFAULT '',
-  `status` int(1) NOT NULL DEFAULT '0',
+  `done` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 ```
