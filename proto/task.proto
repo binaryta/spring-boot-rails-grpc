@@ -28,8 +28,7 @@ message AddTaskResponse {
 
 message UpdateTaskRequest {
   int64 id = 1;
-  string content = 2;
-  bool done = 3;
+  bool done = 2;
 }
 message UpdateTaskResponse {
   Task task = 1;

@@ -17,8 +17,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "taskstore.UpdateTaskRequest" do
     optional :id, :int64, 1
-    optional :content, :string, 2
-    optional :done, :bool, 3
+    optional :done, :bool, 2
   end
   add_message "taskstore.UpdateTaskResponse" do
     optional :task, :message, 1, "taskstore.Task"

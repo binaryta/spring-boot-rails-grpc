@@ -17,7 +17,7 @@ class TaskController < ApplicationController
   end
 
   def update
-    req = Taskstore::UpdateTaskRequest.new(id: params["id"].to_i, done: params["done"], content: "")
+    req = Taskstore::UpdateTaskRequest.new(id: params["id"].to_i, done: params["done"])
     res = @stub.update_task(req)
     render json: res.task.to_h
   end
