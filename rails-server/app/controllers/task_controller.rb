@@ -22,6 +22,12 @@ class TaskController < ApplicationController
     render json: res.task.to_h
   end
 
+  def delete
+    req = Taskstore::DeleteTaskRequest.new(id: params["id"])
+    res = @stub.delete_task(req)
+    render json: res.http_status.to_h
+  end
+
   private
   def stub
     @stub = Taskstore::Taskstore::Stub.new('localhost:6565', :this_channel_is_insecure)

@@ -38,7 +38,7 @@ message DeleteTaskRequest {
   int64 id = 1;
 }
 message DeleteTaskResponse {
-  bool httpStatus = 1;
+  bool success = 1;
 }
 
 message Task {

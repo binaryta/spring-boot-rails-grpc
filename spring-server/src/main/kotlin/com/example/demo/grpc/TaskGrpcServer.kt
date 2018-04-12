@@ -60,4 +60,15 @@ class TaskGrpcServer(@Autowired repository: TaskRepository) : TaskstoreGrpc.Task
     }
     res.onCompleted()
   }
+
+  override
+  fun deleteTask(req: DeleteTaskRequest, res: StreamObserver<DeleteTaskResponse>) {
+    val isSuccess = repository.delete(req.id.toInt())
+
+    val deleteTaskResponseBuilder = DeleteTaskResponse.newBuilder()
+    deleteTaskResponseBuilder.setSuccess(isSuccess)
+
+    res.onNext(deleteTaskResponseBuilder.build())
+    res.onCompleted()
+  }
 }
