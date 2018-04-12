@@ -1,6 +1,6 @@
 # spring-boot-rails-grpc
 
-<img src="https://github.com/Tnarita0000/spring-boot-rails-grpc/blob/master/image.png?raw=true" width="600" />
+<img src="https://github.com/Tnarita0000/spring-boot-rails-grpc/blob/master/screen.png?raw=true" width="600" />
 
 
 gRPCによるKotlin & Ruby & Reactという構成でのWeb運用 <前編>
