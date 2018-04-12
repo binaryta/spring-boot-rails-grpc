@@ -24,6 +24,11 @@ class TasksStore {
     const res = await axios.patch(`/tasks/${task.id}`, {done: task.done});
     return res.data;
   }
+
+  async deleteTask(taskId) {
+    const res = await axios.delete(`/tasks/${taskId}`);
+    return res.data;
+  }
 }
 
 export class Tasks extends React.Component {
@@ -45,14 +50,12 @@ export class Tasks extends React.Component {
     })
   }
 
-  componentWillUpdate() {
-  }
-
   onInputTextEnter(e) {
     if (e.keyCode !== 13) return;
     this.store.createTask(this.state.text).then( (task) => {
       this.setState({
-        tasks: this.state.tasks.concat(task)
+        tasks: this.state.tasks.concat(task),
+        text: "",
       });
     });
   }
@@ -93,6 +96,14 @@ export class Tasks extends React.Component {
     });
   }
 
+  onDeleteClick(targetTask, e) {
+    this.store.deleteTask(targetTask.id).then( (success) => {
+      if (!success) return;
+      const tasks = this.state.tasks.filter(task => targetTask != task);
+      this.setState({ tasks: tasks});
+    });
+  }
+
   isContainTodoArea(e) {
     const todoArea = document.getElementsByClassName("todo-tasks")[0];
     const isContainYAxis = (e.pageY <= todoArea.getBoundingClientRect().bottom && e.pageY >= todoArea.getBoundingClientRect().top)
@@ -117,6 +128,7 @@ export class Tasks extends React.Component {
             placeholder="Enter after you write something to do ...."
             onKeyDown={this.onInputTextEnter.bind(this)}
             onChange={this.onInputTextUpdate.bind(this)}
+            value={this.state.text}
           />
         </div>
         <section className="tasks todo-tasks">
@@ -129,7 +141,7 @@ export class Tasks extends React.Component {
               onDragStart={this.dragStart.bind(this)}
               onDragEnd={this.dragEnd.bind(this, task)}
             >
-              <span className="delete-icon"></span>
+              <span className="delete-icon" onClick={this.onDeleteClick.bind(this, task)}></span>
               <p className="task-content">{task.content}</p>
             </div>
           )

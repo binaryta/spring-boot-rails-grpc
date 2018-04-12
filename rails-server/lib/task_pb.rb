@@ -26,7 +26,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :id, :int64, 1
   end
   add_message "taskstore.DeleteTaskResponse" do
-    optional :httpStatus, :bool, 1
+    optional :success, :bool, 1
   end
   add_message "taskstore.Task" do
     optional :id, :int64, 1

@@ -75,6 +75,11 @@
   right: 5px;
   top: 7px;
 }
+.delete-icon:hover {
+  background-color: #999;
+  color: #ddd;
+  transition: 0.2s;
+}
 
 .delete-icon:before {
   content: 'x';

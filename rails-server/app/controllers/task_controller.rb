@@ -23,9 +23,9 @@ class TaskController < ApplicationController
   end
 
   def delete
-    req = Taskstore::DeleteTaskRequest.new(id: params["id"])
+    req = Taskstore::DeleteTaskRequest.new(id: params["id"].to_i)
     res = @stub.delete_task(req)
-    render json: res.http_status.to_h
+    render json: res.success
   end
 
   private
