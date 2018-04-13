@@ -158,6 +158,7 @@ export class Tasks extends React.Component {
               onDragStart={this.dragStart.bind(this)}
               onDragEnd={this.dragEnd.bind(this, task)}
             >
+              <span className="delete-icon" onClick={this.onDeleteClick.bind(this, task)}></span>
               <p className="task-content">{task.content}</p>
             </div>
           )
