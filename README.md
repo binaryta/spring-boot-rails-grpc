@@ -6,6 +6,9 @@
 gRPCによるKotlin & Ruby & Reactという構成でのWeb運用 <前編>  
 http://blog.engineer.adways.net/entry/2018/03/23/190820
 
+gRPCによるKotlin & Ruby & Reactという構成でのWeb運用 <後編>
+http://blog.engineer.adways.net/entry/2018/04/13/130000
+
 ## Get started
 Create grpc-demo database and create tasks table into it on MySQL, before try this demo.
 ```sql
